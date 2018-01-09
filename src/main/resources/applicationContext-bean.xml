@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="pageBean" class="com.xqkj.bean.PageBean" scope="prototype"></bean>
+
+    <!-- UserDao配置 -->
+    <bean id="ud" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <!-- 创建实现类  是哪个 接口的 -->
+        <property name="mapperInterface">
+            <value>com.xqkj.dao.UserDao</value>
+        </property>
+        <!-- （根据sessionFactory）引入配置文件 -->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+    <!-- us -->
+    <bean id="userService" class="com.xqkj.service.impl.UserServiceImpl">
+        <property name="userDao" ref="ud"></property>
+    </bean>
+
+    <!-- RazorProductDao配置 -->
+    <bean id="rpd" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <!-- 创建实现类  是哪个 接口的 -->
+        <property name="mapperInterface">
+            <value>com.xqkj.dao.RazorProductDao</value>
+        </property>
+        <!-- （根据sessionFactory）引入配置文件 -->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+    <!-- razorProductService -->
+    <bean id="razorProductService" class="com.xqkj.service.impl.RazorProductServiceImpl">
+        <property name="razorProductDao" ref="rpd"></property>
+    </bean>
+
+    <!-- RoleDao -->
+    <bean id="rd" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <!-- 创建实现类  是哪个 接口的 -->
+        <property name="mapperInterface">
+            <value>com.xqkj.dao.RoleDao</value>
+        </property>
+        <!-- （根据sessionFactory）引入配置文件 -->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+    <!-- RoleServiceImpl -->
+    <bean id="roleService" class="com.xqkj.service.impl.RoleServiceImpl">
+        <property name="roleDao" ref="rd"></property>
+    </bean>
+
+    <!-- RazorMenu -->
+    <bean id="rm" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <!-- 创建实现类  是哪个 接口的 -->
+        <property name="mapperInterface">
+            <value>com.xqkj.dao.MenuDao</value>
+        </property>
+        <!-- （根据sessionFactory）引入配置文件 -->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+    <!-- MenuServiceImpl -->
+    <bean id="menuService" class="com.xqkj.service.impl.MenuServiceImpl">
+        <property name="menuDao" ref="rm"></property>
+    </bean>
+
+</beans>
